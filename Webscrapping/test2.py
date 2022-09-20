@@ -30,7 +30,7 @@ class Scraper:
         
         self.URL = BASE_URL
         chrome_options = Options()
-        self.driver = webdriver.Chrome(self.driver_path, options=chrome_options)
+        self.driver = webdriver.Chrome(service=self.service, options=chrome_options)
 
     def land_first_page(self):
         self.driver.get(self.URL)
@@ -56,6 +56,16 @@ class Scraper:
         accept_cookies = self.driver.find_element(By.XPATH, xpath)
         accept_cookies.click()
 
+    def application_techniques(self, xpath: str =  '//*[@id="meganav-content"]/li[2]/a/span'):
+        application_techniques = button2
+        button2 = self.driver.find_element(by=By.XPATH)
+        self.accept_cookies()
+        time.sleep(1)
+        button2.click()
+        
+
+    
+
     def click_element(self, xpath: str):
         element = self.driver.find_element(By.XPATH, xpath)
         element.click()
@@ -78,15 +88,13 @@ class Scraper:
 
 
 
-class thermoscraper(Scraper):
-    def search_product(self, product: str, xpath_search_bar: str =  '//input[@class="data-hj-whitelist"]'):
-        self.accept_cookies()
+
+   
+    
+        
+        #reagent_search.click()
         time.sleep(1)
-        self.click_element('//a[@href="#plasma"]')
-        reagent_search = self.driver.find_element(By.XPATH, xpath_search_bar)
-        reagent_search.click()
-        time.sleep(1)
-        reagent_search.send_keys(product)
+        #reagent_search.send_keys(product)
 
 
     def search_all_products(self,):
@@ -135,3 +143,6 @@ if __name__ == "__main__":
     time.sleep(5)
     bot.accept_cookies()
     time.sleep(5)
+    bot.application_techniques()
+    time.sleep(3)
+    

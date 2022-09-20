@@ -1,3 +1,4 @@
+from tkinter import Frame
 from tracemalloc import start
 from selenium import webdriver
 import selenium
@@ -22,10 +23,11 @@ import os
 from Scraper.Scraper.constants import BASE_URL
 print('start')
 
-class scraper:
+class Scraper:
     def __init__(self):
         self.driver_path = "/Users/charlesolomu/Documents/chromedriver"
-        self.service = Service(self.driver_path)
+        self.service = Service(executable_path=self.driver_path)
+        
         self.URL = BASE_URL
         chrome_options = Options()
         self.driver = webdriver.Chrome(self.driver_path, options=chrome_options)
@@ -33,11 +35,7 @@ class scraper:
     def land_first_page(self):
         self.driver.get(self.URL)
 
-if __name__ == "__main__":
-    print('start')
-    bot = scraper()
-    bot.land_first_page()
-    time.sleep(5)
+    
 
     def accept_cookies(self, xpath: str = '//a[@class="call"]'):
         '''
@@ -49,13 +47,20 @@ if __name__ == "__main__":
             The Xpath of the accept cookies button
 
         '''''''''
+    
+    
+       
+        self.driver.switch_to.frame(2) 
+        
+        
         accept_cookies = self.driver.find_element(By.XPATH, xpath)
         accept_cookies.click()
 
     def click_element(self, xpath: str):
         element = self.driver.find_element(By.XPATH, xpath)
         element.click()
-        '''
+        '''fd
+        i89\'HJNM  u
         Finds and clicks an element in the website
         parameters
         '''''''
@@ -71,7 +76,9 @@ if __name__ == "__main__":
 
         return elements_in_reagents
 
-class thermoscraper(scraper):
+
+
+class thermoscraper(Scraper):
     def search_product(self, product: str, xpath_search_bar: str =  '//input[@class="data-hj-whitelist"]'):
         self.accept_cookies()
         time.sleep(1)
@@ -120,3 +127,11 @@ class thermoscraper(scraper):
             data_list.append(data)
 
         return data_list
+
+if __name__ == "__main__":
+    print('start')
+    bot = Scraper()
+    bot.land_first_page()
+    time.sleep(5)
+    bot.accept_cookies()
+    time.sleep(5)
